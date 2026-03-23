@@ -16,7 +16,8 @@ IOT_PROJECT/
 ├── device_sim.py
 ├── sql_database.sql
 ├── templates/
-│   └── index.html
+   └── index.html
+
 ---
 
 ## III. Components
