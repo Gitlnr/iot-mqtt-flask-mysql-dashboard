@@ -14,11 +14,9 @@ IOT_PROJECT/
 ├── publisher.py
 ├── mqtt_to_mysql.py
 ├── device_sim.py
-│
+├── sql_database.sql
 ├── templates/
 │   └── index.html
-│
-└── sql_database.sql
 ---
 
 ## III. Components
