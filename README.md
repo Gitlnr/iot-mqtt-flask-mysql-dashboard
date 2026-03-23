@@ -29,7 +29,7 @@ IOT_PROJECT/
 * Acts as a communication bridge
 * Transfers messages between publisher and subscribers
 
-### 3. Subscriber (Logger)
+### 3. Subscriber
 * Receives temperature data
 * Stores it in MySQL database
 
