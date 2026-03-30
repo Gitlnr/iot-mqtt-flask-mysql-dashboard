@@ -1,4 +1,4 @@
-## I. Overview
+## **I. Overview**
 This is a simple full-stack IoT project built to understand how the MQTT protocol works.
 The system simulates:
 * Temperature data generation
@@ -6,21 +6,31 @@ The system simulates:
 * Data storage in MySQL
 * Web-based monitoring and control using Flask
 ---
+## **II. Project Structure**
 
-## II. Project Structure
+```
 IOT_PROJECT/
 │
-├── app.py
-├── publisher.py
-├── mqtt_to_mysql.py
-├── device_sim.py
-├── sql_database.sql
-├── templates/
-   └── index.html
-
+├── ROS2_Project/
+│   └── src/
+│       └── ROS2_Project_pkg/
+│           ├── ROS2_Project_pkg/
+│           │   ├── status_publisher.py
+│           │   ├── command_listener.py
+│           │   ├── robotarm_listener.py
+│           │   ├── vehicle_listener.py
+│           │   ├── flask_server.py
+│           │   ├── __init__.py
+│           │   └── templates/
+│           │       └── index.html
+│           │
+│           └── setup.py
+│
+└── README.md
+```
 ---
+## **III. Components**
 
-## III. Components
 ### 1. Publisher
 * Generates random temperature values
 * Sends data every 5 seconds using MQTT
@@ -43,47 +53,61 @@ IOT_PROJECT/
 
 ### 6. MySQL Database
 * Stores temperature data with timestamps
+
 ---
 
-## IV. Workflow
-1. Publisher sends temperature data
-2. MQTT broker forwards it
-3. Subscriber stores data in MySQL
-4. Flask app fetches and displays data
-5. User sends ON/OFF commands
-6. Device simulator executes command
+## **IV. Workflow**
+
+* ROS 2 nodes generate and publish data
+* Topics transmit data between system components
+* Services/actions handle control logic
+* Vehicle System communicates with the Robot Arm
+* Web interface visualizes data and sends commands
+* Robot Arm executes the requested operations
+
 ---
 
-## V. How to Run
-1. Start MQTT broker (Mosquitto)
+## **V. How to Run**
 
-2. Run publisher:
-   python publisher.py
+1. Start ROS 2 environment
 
-3. Run subscriber:
-   python mqtt_to_mysql.py
+```
+source /opt/ros/<distro>/setup.bash
+```
 
-4. Run device simulator:
-   python device_sim.py
+2. Build workspace
 
-5. Run Flask app:
-   python app.py
+```
+colcon build
+```
 
-6. Open browser:
-   http://localhost:5000
+3. Run nodes
+
+```
+ros2 run <package_name> <node_name>
+```
+
+4. Launch full system
+
+```
+ros2 launch <package_name> <launch_file>.py
+```
+
+5. Open web interface
+
+```
+http://localhost:<port>
+```
+
 ---
 
-## VI. Purpose
+## **VI. Purpose**
+
 This project helps in understanding:
-* MQTT publish/subscribe model
-* Real-time IoT communication
-* Backend + database integration
-* Basic web dashboard for IoT
----
 
-## VII. Future Improvements
-* Add real sensors
-* Deploy on cloud
-* Add authentication
-* Improve UI dashboard
-   
+* ROS 2 architecture (nodes, topics, services, actions)
+* Real-time robotic communication
+* System integration between multiple robotic components
+* Full-stack robotics development (backend + interface)
+
+---
