@@ -11,21 +11,12 @@ The system simulates:
 ```
 IOT_PROJECT/
 │
-├── ROS2_Project/
-│   └── src/
-│       └── ROS2_Project_pkg/
-│           ├── ROS2_Project_pkg/
-│           │   ├── status_publisher.py
-│           │   ├── command_listener.py
-│           │   ├── robotarm_listener.py
-│           │   ├── vehicle_listener.py
-│           │   ├── flask_server.py
-│           │   ├── __init__.py
-│           │   └── templates/
-│           │       └── index.html
-│           │
-│           └── setup.py
-│
+├── templates/
+│   └── index.html
+├── app.py
+├── mqtt_to_mysql.py
+├── device_sim.py
+├── sql_database.sql
 └── README.md
 ```
 ---
@@ -58,56 +49,51 @@ IOT_PROJECT/
 
 ## **IV. Workflow**
 
-* ROS 2 nodes generate and publish data
-* Topics transmit data between system components
-* Services/actions handle control logic
-* Vehicle System communicates with the Robot Arm
-* Web interface visualizes data and sends commands
-* Robot Arm executes the requested operations
+1. Publisher sends temperature data
+2. MQTT broker forwards it
+3. Subscriber stores data in MySQL
+4. Flask app fetches and displays data
+5. User sends ON/OFF commands
+6. Device simulator executes command
 
 ---
 
 ## **V. How to Run**
 
-1. Start ROS 2 environment
+1. Start MQTT broker (Mosquitto)
 
-```
-source /opt/ros/<distro>/setup.bash
-```
+2. Run publisher:
+   python publisher.py
 
-2. Build workspace
+3. Run subscriber:
+   python mqtt_to_mysql.py
 
-```
-colcon build
-```
+4. Run device simulator:
+   python device_sim.py
 
-3. Run nodes
+5. Run Flask app:
+   python app.py
 
-```
-ros2 run <package_name> <node_name>
-```
-
-4. Launch full system
-
-```
-ros2 launch <package_name> <launch_file>.py
-```
-
-5. Open web interface
-
-```
-http://localhost:<port>
-```
+6. Open browser:
+   http://localhost:5000
 
 ---
 
 ## **VI. Purpose**
 
 This project helps in understanding:
+* MQTT publish/subscribe model
+* Real-time IoT communication
+* Backend + database integration
+* Basic web dashboard for IoT
 
-* ROS 2 architecture (nodes, topics, services, actions)
-* Real-time robotic communication
-* System integration between multiple robotic components
-* Full-stack robotics development (backend + interface)
+---
+
+## **VII. Future Improvements**
+
+* Add real sensors
+* Deploy on cloud
+* Add authentication
+* Improve UI dashboard
 
 ---
